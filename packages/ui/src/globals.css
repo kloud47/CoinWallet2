@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Name: custom color palette
+      Author: Ilias Ism
+       URL: https://gradient.page */
+
+    /* CSS: .bg-gradient { background: var(--gradient) } */
+    --gradient: #d5d4d0;
+
+    --background: 51 3.25% 6.64%;
+    --foreground: 51 0.5% 99.15%;
+
+    --muted: 51 2.5% 24.9%;
+    --muted-foreground: 51 0.5% 58.3%;
+
+    --popover: 51 64% 10.79%;
+    --popover-foreground: 51 0.5% 99.15%;
+
+    --card: 51 64% 10.79%;
+    --card-foreground: 51 0.5% 99.15%;
+
+    --border: 51 2.5% 24.9%;
+    --input: 51 2.5% 24.9%;
+
+    --primary: 51 5% 83%;
+    --primary-foreground: 51 0.5% 8.299999999999999%;
+
+    --secondary: 51 2.5% 24.9%;
+    --secondary-foreground: 51 0.5% 99.15%;
+
+    --accent: 51 2.5% 24.9%;
+    --accent-foreground: 51 0.5% 99.15%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 51 0.5% 99.15%;
+
+    --ring: 51 5% 83%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .search {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    /* transform: translate(-50%, -50%); */
+    transition: all 0.6s;
+    width: 50px;
+    height: 50px;
+    background: hsl(51 2.5% 24.9%);
+    box-sizing: border-box;
+    border-radius: 25px;
+    border: 4px solid hsl(51 2.5% 24.9%);
+    padding: 5px;
+  }
+
+  input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 42.5px;
+    line-height: 30px;
+    outline: 0;
+    border: 0;
+    display: none;
+    font-size: 1em;
+    border-radius: 20px;
+    padding: 0 20px;
+  }
+
+  .fa {
+    box-sizing: border-box;
+    padding: 10px;
+    width: 42.5px;
+    height: 42.5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    color: white;
+    text-align: center;
+    font-size: 1.2em;
+    transition: all 0.6s;
+  }
+
+  .search:hover {
+    width: 300px;
+    cursor: pointer;
+  }
+
+  .search:hover input {
+    display: block;
+  }
+
+  .search:hover .fa {
+    background: hsl(51 2.5% 24.9%);
+    color: white;
+  }
+}
+
+@layer utilities {
+  .bgBalance {
+    background: linear-gradient(-225deg, #111110 0%, #d5d4d0 48%, #41413e 100%);
+  }
+}
+
+.popup {
+  display: none;
+  transform: translateX(-20px);
+  animation-delay: 2s;
+}
+.popBtn:hover + .popup {
+  display: flex;
+}
