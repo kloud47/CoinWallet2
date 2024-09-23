@@ -14,7 +14,7 @@ type Props = {};
 
 const Sidebar = async (props: Props) => {
   return (
-    <div className="z-20 relative flex flex-col bg-black rounded-full translate-x-2 shadow-xl py-1 hover:translate-x-3 duration-200">
+    <div className="z-20 border-2 border-muted/50 relative flex flex-col bg-black rounded-full translate-x-2 shadow-xl py-1 hover:translate-x-3 duration-200">
       <SidebarItem href={"/dashboard"} icon={<HomeIcon />} title="Home" />
       <SidebarItem
         href={"/transfer"}

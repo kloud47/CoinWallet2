@@ -11,7 +11,7 @@ const SearchBar = (props: Props) => {
         <input
           type="search"
           placeholder="Search here ..."
-          className="outline-none bg-background"
+          className="input outline-none bg-background"
         />
         <Search className="fa fa-search" />
       </div>
