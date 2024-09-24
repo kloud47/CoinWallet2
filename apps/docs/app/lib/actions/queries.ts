@@ -16,7 +16,7 @@ export async function getBalance() {
       locked: balance?.locked || 0,
     };
   } catch (e) {
-    return "Server not reachable";
+    return { error: "Server not reachable" };
   }
 }
 
@@ -36,7 +36,7 @@ export const getOnRampTransactions = async () => {
   }));
 };
 
-export const createRampTransaction = async (
+export const createOnRampTransaction = async (
   provider: string,
   amount: string
 ): Promise<string> => {

@@ -24,6 +24,7 @@ const config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+        btnBlue: "hsl(var(--btnBlue))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         gradient: "hsl(var(--gradient))",

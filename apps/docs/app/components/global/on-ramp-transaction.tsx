@@ -24,7 +24,7 @@ export const OnRampTransactions = async ({
     return (
       <Card
         classname={
-          "rounded-xl bg-background hover:translate-y-[2px] no-scrollbar border-none"
+          "rounded-xl bg-background hover:translate-y-[2px] duration-150 no-scrollbar border-none"
         }
         title="Recent Transactions"
       >
