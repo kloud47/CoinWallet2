@@ -7,7 +7,7 @@ type CardType = {
 
 export const Card = ({ children, title, titleCSS, classname }: CardType) => {
   return (
-    <div className={`${classname} border rounded- p-2`}>
+    <div className={`${classname} border p-2`}>
       <h1 className={`${titleCSS} uppercase text-muted-foreground`}>{title}</h1>
       {children}
     </div>
