@@ -32,9 +32,10 @@ const AddToWalletForm = () => {
   );
   const isLoading = formState.isLoading;
   const router = useRouter();
+  const [amt, setAmt] = useState("");
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    console.log(data);
+    // console.log(data);
     const response = await createOnRampTransaction(data.bank, data.amount);
     reset();
     router.refresh();
@@ -42,9 +43,9 @@ const AddToWalletForm = () => {
 
   return (
     <Card
-      classname="bg-card rounded-xl"
+      classname="bg-background rounded-xl w-[80%]"
       title="Add Money"
-      titleCSS="text-2xl font-bold text-center"
+      titleCSS="text-2xl font-bold text-center text-white"
     >
       <form
         className="border p-4 rounded-xl bg-card-foreground/20"
@@ -59,8 +60,9 @@ const AddToWalletForm = () => {
             disabled={isLoading}
             type="text"
             placeholder="0"
+            onChange={(e) => setAmt(e.target.value)}
             className="text-3xl text-[#3b4861] outline-none placeholder:text-[#7d767d] text-center bg-transparent"
-            // style={{ width: `${formState..length + 1}ch` }}
+            style={{ width: `${amt.length + 1}ch` }}
           />
         </div>
         <label htmlFor="bank" className="text-muted-foreground">
@@ -75,7 +77,7 @@ const AddToWalletForm = () => {
                 ?.redirectUrl
             )
           }
-          className=" bg-accent text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          className=" bg-background/50 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         >
           {SUPPORTED_BANKS.map((option, i) => (
             <option key={i} value={option.name}>

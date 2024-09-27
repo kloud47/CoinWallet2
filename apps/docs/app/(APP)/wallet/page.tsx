@@ -12,7 +12,7 @@ const page = (props: Props) => {
     <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-2 w-full p-3">
       <Card
         title="Wallet"
-        titleCSS="text-3xl font-thin bgTitle p-2 rounded-xl mb-4 text-btnBlue"
+        titleCSS="text-3xl font-thin bgTitle p-2 rounded-xl mb-4 text-[#1699ba]"
         classname="border-none"
       >
         <AddToWalletForm />

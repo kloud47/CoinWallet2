@@ -69,7 +69,7 @@ export const authOptions: AuthOptions = {
     async session({ token, session }: any) {
       if (token) {
         session.user.id = token.id;
-        session.user.mobile = token.mobile;
+        session.user.phone = token.phone;
         session.user.name = token.name;
       }
       // console.log(session)
@@ -79,7 +79,7 @@ export const authOptions: AuthOptions = {
       if (user) {
         token.id = user.id?.toString();
         token.name = user?.name;
-        token.mobile = user?.mobile;
+        token.phone = user?.phone;
       }
       // console.log(token)
       return token;

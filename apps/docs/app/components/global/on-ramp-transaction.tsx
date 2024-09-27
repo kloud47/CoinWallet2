@@ -15,7 +15,7 @@ export const OnRampTransactions = async ({
     return (
       <Card
         title="Recent Transactions"
-        classname="rounded-xl bg-background border-none"
+        classname="rounded-xl bg-muted/20 border"
       >
         <div className="text-center pb-8 pt-8">No Recent transactions</div>
       </Card>
@@ -24,15 +24,18 @@ export const OnRampTransactions = async ({
     return (
       <Card
         classname={
-          "rounded-xl bg-background hover:translate-y-[2px] duration-150 no-scrollbar border-none"
+          "rounded-xl bg-muted/20 hover:translate-y-[2px] duration-150 no-scrollbar border"
         }
         title="Recent Transactions"
       >
         <div className="pt-2">
-          {transactions.map((t) => (
-            <div className="flex justify-between" key={t.txnId}>
+          {transactions.map((t, i) => (
+            <div
+              className={`flex justify-between ${i % 2 == 0 ? "bg-muted" : "bg-muted/60"} rounded-lg mb-1 px-4`}
+              key={t.txnId}
+            >
               <div>
-                <div className="text-sm flex">
+                <div className="text-sm flex items-center">
                   Received INR
                   <div
                     className={`p-3 flex items-center ${t.status === "Success" ? "text-emerald-400" : "text-rose-600"}`}
@@ -40,7 +43,7 @@ export const OnRampTransactions = async ({
                     {"(" + t.status + ")"}
                   </div>
                 </div>
-                <div className="text-slate-600 text-xs">
+                <div className="text-background text-xs">
                   {t.time.toDateString()}
                 </div>
               </div>

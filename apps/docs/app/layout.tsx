@@ -2,7 +2,8 @@ import "@repo/ui/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { AppBar } from "./components/navigation/navbar/navbar";
-import Providers from "./providers/AuthProvider";
+import Providers from "./providers/Provider";
+import { Toaster } from "@repo/ui/components/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,8 +22,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <AppBar />
-          <div id="portal"></div>
           {children}
+          <Toaster />
         </Providers>
       </body>
     </html>

@@ -61,3 +61,129 @@ export const createOnRampTransaction = async (
     .then(() => "Done")
     .catch((err) => "Someting happened in the database");
 };
+
+export async function SearchAllContacts(searchTerm: string) {
+  const session = await getServerSession(authOptions);
+  const uID = Number(session?.user?.id);
+  const data = await prisma.contacts.findMany({
+    where: {
+      AND: [
+        {
+          userID: uID,
+        },
+        {
+          OR: [
+            {
+              givenName: {
+                startsWith: searchTerm,
+              },
+            },
+            {
+              ContactPhone: {
+                startsWith: searchTerm,
+              },
+            },
+          ],
+        },
+      ],
+    },
+    select: {
+      givenName: true,
+      ContactPhone: true,
+      contactProfile: true,
+    },
+  });
+  return data;
+}
+
+export const CreateNotification = async ({
+  id,
+  message,
+}: {
+  id: number;
+  message: string;
+}) => {
+  const userData = await prisma.user.findFirst({
+    where: {
+      id: id,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  if (!userData) {
+    console.log("Could not found user.");
+  }
+
+  await prisma.notification.create({
+    data: {
+      user: {
+        connect: {
+          id: userData?.id,
+        },
+      },
+      notification: message,
+    },
+  });
+};
+
+export const createContact = async ({
+  phone,
+  name,
+}: {
+  phone: string;
+  name: string;
+}) => {
+  const session = await getServerSession(authOptions);
+  const uid = session?.user.id;
+  if (!uid) {
+    console.log("Not logged in.");
+    return;
+  }
+  try {
+    const userData = await prisma.user.findFirst({
+      where: {
+        phone: phone,
+      },
+      select: {
+        profile_url: true,
+        name: true,
+      },
+    });
+
+    await prisma.contacts.upsert({
+      where: {
+        contactID: {
+          userID: Number(uid),
+          ContactPhone: phone,
+        },
+      },
+      update: {
+        userID: Number(uid),
+        givenName: name,
+      },
+      create: {
+        userID: Number(uid),
+        givenName: name,
+        contactName: userData?.name || "",
+        ContactPhone: phone,
+        contactProfile: userData?.profile_url,
+        Created: new Date(),
+      },
+    });
+
+    await CreateNotification({
+      id: uid,
+      message: `New contact ${name} created`,
+    });
+
+    return {
+      msg: "Contact created",
+    };
+  } catch (e) {
+    return {
+      msg: "Could not add contact",
+    };
+  }
+};

@@ -161,6 +161,26 @@
   .bgBalance {
     background: linear-gradient(-225deg, #111110 0%, #d5d4d0 48%, #41413e 100%);
   }
+
+  .shaking:hover {
+    animation: shake 0.4s;
+  }
+
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(4px);
+    }
+
+    50% {
+      transform: translateX(-4px);
+    }
+    100% {
+      transform: translateX(0px);
+    }
+  }
 }
 
 .bgTitle {

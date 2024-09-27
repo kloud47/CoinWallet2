@@ -29,6 +29,7 @@ model User {
   contactProfile    contacts[]          @relation(name: "ContactProfileRelation")
   split             Split[]             @relation(name: "SplitRelation")
   loan              Loan[]              @relation(name: "loanRelation")
+  Notification      Notification[]
 }
 
 model Merchant {
@@ -117,6 +118,17 @@ model Loan {
   loanTo    Int
   duration  DateTime
   lender    User     @relation(name: "loanRelation", fields: [loanID], references: [id])
+}
+
+model Notification {
+  id           String   @id @default(uuid())
+  notification String
+  userID       Int
+  user         User     @relation(fields: [userID], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([userID])
 }
 
 enum SplitStatus {

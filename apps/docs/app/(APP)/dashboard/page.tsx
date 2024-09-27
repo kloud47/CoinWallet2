@@ -11,12 +11,16 @@ type Props = {};
 
 const page = async (props: Props) => {
   return (
-    <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-2 w-full p-3">
+    <div className="grid lg:grid-cols-[60%_40%] grid-cols-1 gap-x-2 w-full p-3">
       <Card
         title="Dashboard"
-        classname="bg-card/50 rounded-xl"
-        titleCSS="text-2xl font-bold"
+        classname="bg-transparent border-none rounded-xl"
+        titleCSS="text-3xl font-thin bgTitle p-2 rounded-xl mb-4 !text-[#1699ba]"
       >
+        <BalanceCard />
+        <Card classname="bg-background" title="Recharge">
+          <Recharge />
+        </Card>
         <Card>
           <div className="grid grid-cols-3 w-full gap-x-1">
             <div className="bg-muted-foreground flex">
@@ -58,12 +62,8 @@ const page = async (props: Props) => {
             </div>
           </div>
         </Card>
-        <BalanceCard />
-        <Card classname="bg-background" title="Recharge">
-          <Recharge />
-        </Card>
       </Card>
-      <Card classname="bg-card rounded-xl">
+      <Card classname="bg-accent/50 rounded-xl">
         <div className="w-full">
           <Contacts />
         </div>

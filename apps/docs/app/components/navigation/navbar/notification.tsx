@@ -15,7 +15,7 @@ const Notification = (props: Props) => {
   return (
     <Sheet>
       <SheetTrigger>
-        <Bell className="mr-2" />
+        <Bell className="mr-2 shaking" color="#D19A02" />
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
