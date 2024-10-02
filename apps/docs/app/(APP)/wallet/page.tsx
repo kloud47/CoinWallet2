@@ -3,20 +3,20 @@ import React from "react";
 import { BalanceCard } from "../_balance/balance-card";
 import AllOnRampTransactions from "./_components/All-onRampTransactions";
 import AddToWalletForm from "~/app/components/forms/add-to-wallet-form";
-import WalletStatus from "./_components/wallet-status";
+import WalletActivity from "./_components/wallet-status";
 
 type Props = {};
 
-const page = (props: Props) => {
+const page = async (props: Props) => {
   return (
-    <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-2 w-full p-3">
+    <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-2 w-full p-3 sticky top-[64px]">
       <Card
         title="Wallet"
-        titleCSS="text-3xl font-thin bgTitle p-2 rounded-xl mb-4 text-[#1699ba]"
+        titleCSS="text-3xl font-thin bgTitle p-2 rounded-xl mb-4 !text-[#1699ba]"
         classname="border-none"
       >
         <AddToWalletForm />
-        <WalletStatus />
+        <WalletActivity />
       </Card>
       <Card classname="border-none">
         <BalanceCard />

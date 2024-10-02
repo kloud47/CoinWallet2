@@ -22,6 +22,7 @@ const AddContactForm = () => {
       title: "New Contact",
       description: `Created a new contact ,${data.name}`,
     });
+    reset();
   };
 
   return (

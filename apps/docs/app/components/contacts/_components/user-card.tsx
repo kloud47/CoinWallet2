@@ -23,7 +23,7 @@ export const UserCard = ({ children, imgUrl, name }: CardInterface) => {
             className="h-[70px] w-[70px] shadow-xl  text-[#fff] border-[#fff] rounded-2xl"
           />
         )}
-        <div className="text-black font-thin">{children}</div>
+        <div className="text-black font-medium">{children}</div>
       </a>
     </>
   );

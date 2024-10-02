@@ -1,14 +1,15 @@
 import { Card } from "@repo/ui/card";
 import React from "react";
+import { ChartComp } from "./chart-comp";
 
 type Props = {};
 
-const WalletStatus = (props: Props) => {
+const WalletActivity = (props: Props) => {
   return (
-    <Card title="Wallet Status" classname="mt-5 bg-accent rounded-xl">
-      status
+    <Card title="Wallet Activity" classname="mt-5 bg-accent rounded-xl">
+      <ChartComp />
     </Card>
   );
 };
 
-export default WalletStatus;
+export default WalletActivity;

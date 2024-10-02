@@ -3,15 +3,26 @@ import { Card } from "@repo/ui/card";
 export const OnRampTransactions = async ({
   transactions,
 }: {
-  transactions: {
-    txnId: number;
-    time: Date;
-    amount: number;
-    status?: "Success" | "Failure" | "Processing";
-    provider?: string;
-  }[];
+  transactions:
+    | {
+        txnId: number;
+        time: Date;
+        amount: number;
+        status?: "Success" | "Failure" | "Processing";
+        provider?: string;
+      }[]
+    | { error: string | undefined };
 }) => {
-  if (!transactions.length) {
+  if (transactions.error) {
+    return (
+      <Card
+        title="Recent Transactions"
+        classname="rounded-xl bg-muted/20 border"
+      >
+        <div className="text-center pb-8 pt-8">{transactions.error}</div>
+      </Card>
+    );
+  } else if (!transactions?.length) {
     return (
       <Card
         title="Recent Transactions"

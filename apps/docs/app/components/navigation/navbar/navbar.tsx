@@ -14,13 +14,15 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import SearchBar from "./search-bar";
 import Notification from "./notification";
 import { Github, LifeBuoy, User, UserPlus, Wallet } from "lucide-react";
+import { useEffect } from "react";
+import NetworkStatus from "../../global/NetworkStatus";
 // import { useState } from "react";
 
 export const AppBar = () => {
   const { data: session, status } = useSession();
   // const [open, setOpen] = useState(false);
   const username = session?.user?.name || "";
-  const avatar = session?.user?.image || "none";
+  const avatar = session?.user?.profile_url || "none";
   const router = useRouter();
   const pathname = usePathname();
 
@@ -38,7 +40,7 @@ export const AppBar = () => {
 
   return (
     <>
-      <ul className="flex  justify-between w-screen px-3 h-[70px] fixed z-50 items-center">
+      <ul className="flex  justify-between w-screen px-3 h-[70px] fixed z-50 items-center bg-background/90">
         <li className="text-3xl font-bold flex flex-col justify-center text-white">
           <Link href={"/"}>
             <span className="text-[#d19a02] font-black text-4xl">Co</span>
@@ -84,7 +86,11 @@ export const AppBar = () => {
                 Invite users
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() =>
+                  router.push("https://github.com/kloud47/CoinWallet2")
+                }
+              >
                 <Github size={20} className="mr-2" /> Github
               </DropdownMenuItem>
               <DropdownMenuItem>
@@ -102,6 +108,7 @@ export const AppBar = () => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          <NetworkStatus />
         </li>
       </ul>
     </>

@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -8,10 +9,30 @@ import {
   SheetTrigger,
 } from "@repo/ui/components/sheet";
 import { Bell } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { getAllNotification } from "~/app/lib/actions/queries";
 
-type Props = {};
+interface Notification {
+  id: string;
+  notification: string;
+  userID: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
-const Notification = (props: Props) => {
+const Notification = () => {
+  const session = useSession();
+  const [notification, setNotification] = useState<Notification[]>([]);
+
+  useEffect(() => {
+    const notify = async () => {
+      const notiData = await getAllNotification(session.data?.user.id);
+      setNotification(notiData.map((item) => item));
+    };
+    notify();
+    console.log(notification);
+  }, []);
+
   return (
     <Sheet>
       <SheetTrigger>
@@ -20,8 +41,24 @@ const Notification = (props: Props) => {
       <SheetContent>
         <SheetHeader>
           <SheetTitle>Notification</SheetTitle>
-          <SheetDescription>All notifications arrive here</SheetDescription>
+          <SheetDescription>All notifications of your account</SheetDescription>
         </SheetHeader>
+        <ul className="mt-4">
+          {notification.map((item, i) => (
+            <li
+              key={i}
+              className="bg-muted mb-1 flex items-center justify-between p-1 rounded-xl"
+            >
+              <div className="bg-muted-foreground flex items-center justify-center text-lg p-1 h-[50px] w-[50px] border-4 text-background font-medium border-muted/70 shadow-md rounded-full">
+                {session.data?.user.name?.substring(0, 2)}
+              </div>
+              <div className="text-xs">{item.notification}</div>
+              <div className="text-xs text-muted-foreground">
+                {item.createdAt.toDateString()}
+              </div>
+            </li>
+          ))}
+        </ul>
       </SheetContent>
     </Sheet>
   );
