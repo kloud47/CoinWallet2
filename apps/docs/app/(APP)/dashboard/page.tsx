@@ -21,7 +21,7 @@ const page = async (props: Props) => {
       <Card
         title="Dashboard"
         classname="bg-transparent border-none rounded-xl"
-        titleCSS="text-3xl font-thin bgTitle p-2 rounded-xl mb-4 !text-[#1699ba]"
+        titleCSS="text-3xl font-thin !text-[#D19A02]"
       >
         <BalanceCard />
         <Card classname="bg-background" title="Recharge">

@@ -1,19 +1,17 @@
 import React from "react";
 import { Input } from "@repo/ui/components/input";
-import { Search } from "lucide-react";
+import { Search, SearchIcon } from "lucide-react";
 
 type Props = {};
 
 const SearchBar = (props: Props) => {
   return (
     <div className="flex items-center">
-      <div className="search text-foreground">
-        <input
-          type="search"
-          placeholder="Search here ..."
-          className="input outline-none bg-background"
-        />
-        <Search className="fa fa-search" />
+      <div className="flex items-center text-foreground border-b">
+        <div className="h-full">
+          <SearchIcon />
+        </div>
+        <Input placeholder="search..." className="border-none outline-none" />
       </div>
     </div>
   );

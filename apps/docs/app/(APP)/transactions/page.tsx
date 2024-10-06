@@ -8,7 +8,7 @@ const page = (props: Props) => {
     <Card
       title="Transactions"
       classname="bg-transparent border-none rounded-xl"
-      titleCSS="text-3xl font-thin bgTitle p-2 rounded-xl mb-4 !text-[#1699ba]"
+      titleCSS="text-3xl font-thin !text-[#D19A02]"
     >
       <div className="relative grid  grid-cols-1 lg:grid-cols-2 m-1 gap-2">
         <Card>ok</Card>

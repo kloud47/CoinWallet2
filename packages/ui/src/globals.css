@@ -206,15 +206,40 @@
       transform: translateX(0px);
     }
   }
-}
 
-.bgTitle {
-  background: rgb(65, 65, 62);
-  background: linear-gradient(
-    90deg,
-    rgba(65, 65, 62, 1) 46%,
-    rgba(26, 26, 24, 1) 84%
-  );
+  .LoadingDot {
+    width: 15px;
+    aspect-ratio: 1;
+    background: #000;
+    border-radius: 50%;
+    animation: d6 1s infinite linear alternate;
+  }
+  @keyframes d6 {
+    0% {
+      box-shadow:
+        15px 0,
+        -25px 0;
+    }
+    50% {
+      box-shadow:
+        15px 0,
+        -15px 0;
+    }
+    100% {
+      box-shadow:
+        25px 0,
+        -15px 0;
+    }
+  }
+
+  .bgTitle {
+    background: rgb(65, 65, 62);
+    background: linear-gradient(
+      90deg,
+      rgba(65, 65, 62, 1) 46%,
+      rgba(26, 26, 24, 1) 84%
+    );
+  }
 }
 
 .popup {

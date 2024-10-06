@@ -1,3 +1,4 @@
+"use client";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { profileAtom } from "../atoms/states";
 

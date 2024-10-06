@@ -7,9 +7,10 @@ export const UploadImage = async (
 ): Promise<UploadApiResponse | UploadApiErrorResponse | undefined> => {
   const buffer = await file.arrayBuffer();
   const bytes = Buffer.from(buffer);
+  console.log("Upload image function");
 
-  return new Promise(async (resolve, reject) => {
-    await cloudinary.uploader
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader
       .upload_stream(
         {
           resource_type: "image",

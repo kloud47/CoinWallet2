@@ -28,6 +28,9 @@ import ProfileDialog from "./_components/profile-dialog";
 import { getProfile } from "~/app/store/hooks/context";
 import Link from "next/link";
 import { Button } from "@repo/ui/components/button";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { profileAtom } from "~/app/store/atoms/states";
+import Image from "next/image";
 
 type Props = {};
 
@@ -36,8 +39,10 @@ const Profile = (props: Props) => {
   const username = session?.data?.user.name;
   const phoneNo = session?.data?.user.phone;
   // console.log(session.data?.user);
-  const imageUrl = getProfile();
   const [pop, setPop] = useState(false);
+
+  const imageUrl = useRecoilValue(profileAtom);
+  console.log("image URL)) =>  ", imageUrl);
 
   const handleCopy = async () => {
     navigator.clipboard.writeText(String(phoneNo));
@@ -51,7 +56,7 @@ const Profile = (props: Props) => {
     <Card
       title="Profile"
       classname="bg-transparent border-none rounded-xl"
-      titleCSS="text-3xl font-thin bgTitle p-2 rounded-xl mb-4 !text-[#1699ba]"
+      titleCSS="text-3xl font-thin !text-[#1699ba]"
     >
       <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-2">
         <Card classname="border-none bg-muted/20 rounded-xl">
@@ -77,7 +82,7 @@ const Profile = (props: Props) => {
               <img
                 src={String(imageUrl)}
                 alt="Profile Image"
-                className="border-[20px] border-accent/60 rounded-full h-[200px] w-[200px]"
+                className="border-[20px] border-accent/60 rounded-full h-[300px] w-[300px]"
               />
             )}
             <Dialog>

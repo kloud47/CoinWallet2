@@ -43,6 +43,7 @@
     "zod": "^3.23.8"
   },
   "exports": {
+    "./loadingDot": "./src/loading-dot.tsx",
     "./card": "./src/card.tsx",
     "./globals.css": "./src/globals.css",
     "./postcss.config": "./postcss.config.mjs",

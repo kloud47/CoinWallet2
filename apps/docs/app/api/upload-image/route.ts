@@ -1,5 +1,6 @@
 import { UploadImage, DeleteImage } from "../../lib/actions/Image";
 import prisma from "@repo/database/client";
+import { constants } from "buffer";
 import { NextResponse, NextRequest } from "next/server";
 import { profileState } from "~/app/store/hooks/context";
 
@@ -25,7 +26,7 @@ export const POST = async (req: NextRequest) => {
     await DeleteImage(picExist.public_id);
   }
 
-  const data = await UploadImage(image, "CoinWallet-Profile");
+  const data = await UploadImage(image, "Coin-Wallet-Profile");
 
   await prisma.user.update({
     where: {
@@ -44,7 +45,5 @@ export const POST = async (req: NextRequest) => {
       contactProfile: data?.secure_url,
     },
   });
-  profileState(data?.secure_url);
-
-  return NextResponse.json({ msg: image }, { status: 200 });
+  return NextResponse.json({ msg: data?.secure_url }, { status: 200 });
 };

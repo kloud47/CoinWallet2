@@ -16,6 +16,9 @@ import Notification from "./notification";
 import { Github, LifeBuoy, User, UserPlus, Wallet } from "lucide-react";
 import { useEffect } from "react";
 import NetworkStatus from "../../global/NetworkStatus";
+import { FetchProfile } from "~/app/lib/actions/queries";
+import { useRecoilState } from "recoil";
+import { profileAtom } from "~/app/store/atoms/states";
 // import { useState } from "react";
 
 export const AppBar = () => {
@@ -25,6 +28,7 @@ export const AppBar = () => {
   const avatar = session?.user?.profile_url || "none";
   const router = useRouter();
   const pathname = usePathname();
+  const [imageUrl, setImageUrl] = useRecoilState(profileAtom);
 
   const handleProfile = () => {
     return router.push("/profile");
@@ -37,6 +41,14 @@ export const AppBar = () => {
   const onSignOut = () => {
     signOut();
   };
+
+  useEffect(() => {
+    const getProfileImage = async () => {
+      const ImageData = await FetchProfile();
+      setImageUrl(ImageData);
+    };
+    getProfileImage();
+  }, [imageUrl]);
 
   return (
     <>
@@ -56,14 +68,14 @@ export const AppBar = () => {
             <DropdownMenuTrigger className="outline-none">
               {username && (
                 <div className="bg-[#000] w-[40px] h-[40px] rounded-full ml-4 hover:cursor-pointer">
-                  {/* {avatar && username && (
-                <img
-                  src={String(avatar)}
-                  alt="image"
-                  className="rounded-full border h-full w-full hover:scale-110 duration-200 border-[#000]"
-                />
-              )} */}
-                  {avatar && username && (
+                  {!(avatar.length == 0) && username && (
+                    <img
+                      src={String(imageUrl)}
+                      alt="image"
+                      className="rounded-full h-full w-full hover:scale-110 duration-200 border-4 border-muted/70"
+                    />
+                  )}
+                  {avatar.length == 0 && username && (
                     <div className="bg-muted-foreground flex items-center justify-center text-lg p-1 h-full w-full border-4 text-background font-medium border-muted/70 shadow-md rounded-full">
                       {username?.substring(0, 2)}
                     </div>

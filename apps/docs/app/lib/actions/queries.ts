@@ -272,3 +272,26 @@ export const UpsertUser = async (bank: string, pin: string) => {
     },
   });
 };
+
+export async function FetchProfile() {
+  const session = await getServerSession(authOptions);
+  const userId = session?.user?.id;
+  console.log(userId);
+
+  if (!userId) return null;
+
+  const data = await prisma.user
+    .findFirst({
+      where: {
+        id: Number(userId),
+      },
+      select: {
+        profile_url: true,
+      },
+    })
+    .then((data) => data?.profile_url);
+
+  // console.log(data)
+
+  return data;
+}

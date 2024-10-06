@@ -8,6 +8,8 @@ import { createOnRampTransaction } from "~/app/lib/actions/queries";
 import Loading from "../global/loading";
 import { IndianRupeeIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { CheckPin } from "~/app/lib/actions/check-pin";
+import ModalUPIpin from "./upi-pin-modal-form";
 
 const SUPPORTED_BANKS = [
   {
@@ -33,10 +35,17 @@ const AddToWalletForm = () => {
   const isLoading = formState.isLoading;
   const router = useRouter();
   const [amt, setAmt] = useState("");
+  const [openPin, setOpenPin] = useState(false);
+  const [formData, setFormData] = useState<FormFields>();
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     // console.log(data);
+    // setFormData(data);
+    // setOpenPin(true);
+    // if (check) {
     const response = await createOnRampTransaction(data.bank, data.amount);
+    // } else {
+    // }
     reset();
     router.refresh();
   };

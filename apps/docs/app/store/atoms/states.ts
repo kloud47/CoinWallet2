@@ -1,3 +1,4 @@
+"use client";
 import { atom } from "recoil";
 
 export const profileAtom = atom<string | null | undefined>({

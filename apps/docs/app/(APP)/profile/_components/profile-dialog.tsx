@@ -4,6 +4,9 @@ import { Button } from "@repo/ui/components/button";
 import axios from "axios";
 import Image from "next/image";
 import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
+import { useRecoilState } from "recoil";
+import { profileAtom } from "~/app/store/atoms/states";
+import { profileState } from "~/app/store/hooks/context";
 
 type Props = {
   user: string | null | undefined;
@@ -14,10 +17,11 @@ const ProfileDialog = ({ user, imageUrl }: Props) => {
   const imageRef = useRef(null);
   const [image, setImage] = useState(undefined as File | undefined); // type casting
   const [preview, setPreview] = useState<string | undefined | null>(imageUrl);
+  const [ImageUrl, setImageUrl] = useRecoilState(profileAtom);
 
   const ChooseFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setPreview(URL.createObjectURL(e.target.files[0]));
+      setPreview(URL.createObjectURL(e.target.files[0]!));
       setImage(e.target.files[0]);
     }
   };
@@ -34,6 +38,7 @@ const ProfileDialog = ({ user, imageUrl }: Props) => {
       formData.append("user", String(user));
 
       const response = await axios.post(`/api/upload-image`, formData);
+      setImageUrl(String(response.data.msg));
     } catch (err: any) {
       console.log("Error", err.message);
     }
@@ -51,14 +56,14 @@ const ProfileDialog = ({ user, imageUrl }: Props) => {
               +
             </div>
           ) : (
-            <Image
+            <img
               ref={imageRef}
               src={preview}
               alt="profile image"
               className="overflow-hidden object-contain w-auto h-auto"
               // onLoad={onImageLoad}
-              width={300}
-              height={300}
+              // width={300}
+              // height={300}
             />
           )}
         </div>
